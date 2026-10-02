@@ -396,17 +396,12 @@ the following steps must be run:
     </ul>
     then perform a <a>smooth scroll</a> of <var>box</var> to <var>position</var>;
     otherwise, perform an <a>instant scroll</a> of <var>box</var> to <var>position</var>.
-1. Wait until either the position has finished updating, the <a>smooth scroll</a> performed in the previous step, if any, has been <a lt="smooth scroll aborted">aborted</a>, or <var>scrollPromise</var> has been resolved.
+1. Wait until either the position has finished updating, or <var>scrollPromise</var> has been resolved.
 1. If <var>scrollPromise</var> is still in the pending state:
-    1. If a <a>smooth scroll</a> was performed in the previous steps and it has been <a lt="smooth scroll aborted">aborted</a>, resolve <var>scrollPromise</var> with an [=interrupted scroll result=].
-    1. Otherwise:
-        1. If the scroll position changed as a result of this call, emit the <a event>scrollend</a> event.
-        1. Resolve <var>scrollPromise</var> with a [=non-interrupted scroll result=].
+    1. If the scroll position changed as a result of this call, emit the <a event>scrollend</a> event.
+    1. Resolve <var>scrollPromise</var> with a [=non-interrupted scroll result=].
 
   Note: <code>behavior: "instant"</code> always performs an <a>instant scroll</a> by this algorithm.
-
-  Note: This specification does not define whether user interaction aborts an ongoing <a>smooth scroll</a>,
-  so whether <var>scrollPromise</var> is resolved with an [=interrupted scroll result=] can differ between user agents in that case.
 
   Note: If the scroll position did not change as a result of the user interaction or programmatic invocation, where no translations were applied as a result, then no <a event>scrollend</a> event fires because no scrolling occurred.
 </div>
